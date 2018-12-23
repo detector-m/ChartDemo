@@ -1,5 +1,5 @@
 //
-//  KeepBalloonMarker.swift
+//  BalloonMarker.swift
 //  ChartsDemo
 //
 //  Copyright 2015 Daniel Cohen Gindi & Philipp Jahoda
@@ -13,7 +13,7 @@ import Foundation
 import Charts
 import UIKit
 
-open class KeepBalloonMarker: MarkerImage {
+open class BalloonMarker: MarkerImage {
     @objc open var color: UIColor
     @objc open var arrowSize = CGSize(width: 15, height: 11)
     @objc open var font: UIFont

@@ -1,15 +1,15 @@
 //
-//  KBXAxisRenderer.swift
-//  Keep
+//  YHXAxisRenderer.swift
+  
 //
 //  Created by 杨虎 on 2018/10/30.
-//  Copyright © 2018年 Beijing Calorie Technology Co., Ltd. All rights reserved.
+//  Copyright © 2018年  . All rights reserved.
 //
 import CoreGraphics
 import Foundation
 import Charts
 
-class KBXAxisRenderer: XAxisRenderer {
+class YHXAxisRenderer: XAxisRenderer {
     
     @objc open var selectedEntryX:NSNumber?
     

@@ -7,7 +7,7 @@
 import Foundation
 import Charts
 
-open class KeepXYMarkerView: KeepBalloonMarker {
+open class XYMarkerView: BalloonMarker {
     @objc open var xAxisValueFormatter: IAxisValueFormatter?
     fileprivate var yFormatter = NumberFormatter()
     fileprivate var hideYValue = false

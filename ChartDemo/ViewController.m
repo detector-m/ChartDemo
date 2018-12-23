@@ -9,19 +9,19 @@
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 
-#define KBChartWidth SCREENWIDTH
-#define KBPerBarWidth (KBChartWidth / KBVisibleHistorysCount)
+#define YHChartWidth SCREENWIDTH
+#define YHPerBarWidth (YHChartWidth / YHVisibleHistorysCount)
 
 @import Charts;
 #import "ViewController.h"
 #import "ChartDemo-Swift.h"
-#import "KitbitShortDateValueFormatter.h"
+#import "ShortDateValueFormatter.h"
 
-static const CGFloat KBChartHeight = 343;
-static const NSUInteger KBVisibleHistorysCount = 9;
-static const NSUInteger KBFetchNumber = 10;
+static const CGFloat YHChartHeight = 343;
+static const NSUInteger YHVisibleHistorysCount = 9;
+static const NSUInteger YHFetchNumber = 10;
 
-@interface ViewController () <UIScrollViewDelegate,ChartViewDelegate,KBBarChartRendererDelegate>
+@interface ViewController () <UIScrollViewDelegate,ChartViewDelegate,YHBarChartRendererDelegate>
 @property (nonatomic, strong) NSMutableArray<BarChartDataEntry *> *historys;
 @property (nonatomic, strong) UIScrollView *containerScrollView;
 @property (nonatomic, strong) CombinedChartView *stepHistoryChart;
@@ -38,7 +38,7 @@ static const NSUInteger KBFetchNumber = 10;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _containerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, KBChartWidth, KBChartHeight)];
+    _containerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, YHChartWidth, YHChartHeight)];
     _containerScrollView.showsVerticalScrollIndicator = NO;
     _containerScrollView.showsHorizontalScrollIndicator = NO;
     _containerScrollView.alwaysBounceVertical = NO;
@@ -47,7 +47,7 @@ static const NSUInteger KBFetchNumber = 10;
     _containerScrollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.containerScrollView];
     
-    self.lastOffsetToRightEdge = KBChartWidth;
+    self.lastOffsetToRightEdge = YHChartWidth;
     
     UIImage *image = [UIImage imageNamed:@"icon_data_center_data_chart_arrow"];
     UIImageView *arrowView = [[UIImageView alloc] initWithImage:image];
@@ -64,7 +64,7 @@ static const NSUInteger KBFetchNumber = 10;
     if (!_stepDatas) {
         _stepDatas = [NSMutableArray array];
     }
-    NSUInteger count = KBFetchNumber;
+    NSUInteger count = YHFetchNumber;
     for (NSUInteger i = 0; i < count; i++) {
         NSUInteger random = arc4random_uniform(5000);
         [_stepDatas addObject:@(random)];
@@ -84,8 +84,8 @@ static const NSUInteger KBFetchNumber = 10;
 
 
 - (void)updateHistoryChartView {
-    _containerScrollView.contentSize = CGSizeMake(self.historys.count * KBPerBarWidth, KBChartHeight);
-    _containerScrollView.contentOffset = CGPointMake((self.historys.count-KBVisibleHistorysCount) * KBPerBarWidth, 0);
+    _containerScrollView.contentSize = CGSizeMake(self.historys.count * YHPerBarWidth, YHChartHeight);
+    _containerScrollView.contentOffset = CGPointMake((self.historys.count-YHVisibleHistorysCount) * YHPerBarWidth, 0);
     _containerScrollView.backgroundColor = [UIColor blackColor];
     CGRect chartRect = CGRectMake(0, 0, _containerScrollView.contentSize.width, _containerScrollView.contentSize.height);
     if (!_stepHistoryChart) {
@@ -104,7 +104,7 @@ static const NSUInteger KBFetchNumber = 10;
         xAxis.labelTextColor = [UIColor colorWithWhite:1 alpha:0.6];
 
         ChartXAxisRenderer *render = _stepHistoryChart.xAxisRenderer;
-        KBXAxisRenderer *xAxisRenderer = [[KBXAxisRenderer alloc] initWithViewPortHandler:render.viewPortHandler xAxis:(ChartXAxis *)(render.axis) transformer:render.transformer];
+        YHXAxisRenderer *xAxisRenderer = [[YHXAxisRenderer alloc] initWithViewPortHandler:render.viewPortHandler xAxis:(ChartXAxis *)(render.axis) transformer:render.transformer];
         xAxisRenderer.selectedXLabelFont = [UIFont systemFontOfSize:14];
         xAxisRenderer.selectedXLabelTextColor = [UIColor whiteColor];
         _stepHistoryChart.xAxisRenderer = xAxisRenderer;
@@ -126,7 +126,7 @@ static const NSUInteger KBFetchNumber = 10;
     ChartXAxis *xAxis = _stepHistoryChart.xAxis;
     xAxis.axisMaxLabels = self.historys.count;
     xAxis.labelCount = self.historys.count;
-    xAxis.valueFormatter = [[KitbitShortDateValueFormatter alloc] initWithVisibleLabelsCount:KBVisibleHistorysCount allDataCount:self.historys.count];
+    xAxis.valueFormatter = [[ShortDateValueFormatter alloc] initWithVisibleLabelsCount:YHVisibleHistorysCount allDataCount:self.historys.count];
 
     CombinedChartData *chartData = [[CombinedChartData alloc] init];
     chartData.lineData = [self generateLineData];
@@ -135,9 +135,9 @@ static const NSUInteger KBFetchNumber = 10;
     _stepHistoryChart.data = chartData;
     CombinedChartRenderer *combineRender = (CombinedChartRenderer *)_stepHistoryChart.renderer;
     BarChartRenderer *barRender = (BarChartRenderer *)[combineRender getSubRendererWithIndex:1];
-    KBBarChartRenderer *kbRender = [[KBBarChartRenderer alloc] initWithDataProvider:_stepHistoryChart animator:barRender.animator viewPortHandler:barRender.viewPortHandler];
-    kbRender.delegate = self;
-    combineRender.subRenderers = @[[combineRender getSubRendererWithIndex:0],kbRender];
+    YHBarChartRenderer *yhRender = [[YHBarChartRenderer alloc] initWithDataProvider:_stepHistoryChart animator:barRender.animator viewPortHandler:barRender.viewPortHandler];
+    yhRender.delegate = self;
+    combineRender.subRenderers = @[[combineRender getSubRendererWithIndex:0],yhRender];
 
     _stepHistoryChart.leftAxis.axisMaximum = chartData.yMax+10;
 }
@@ -187,13 +187,13 @@ static const NSUInteger KBFetchNumber = 10;
         [_historys addObject:[[BarChartDataEntry alloc] initWithX:@(i).doubleValue y:@(random).doubleValue]];
     }
     NSUInteger count = self.stepDatas.count;
-    for (NSInteger i = count; i < count+KBVisibleHistorysCount/2; i++) {
+    for (NSInteger i = count; i < count+YHVisibleHistorysCount/2; i++) {
         [_historys addObject:[[BarChartDataEntry alloc] initWithX:@(i).doubleValue y:@(0).doubleValue]];
     }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.x < -KBPerBarWidth) {
+    if (scrollView.contentOffset.x < -YHPerBarWidth) {
         [self addData];
     }
 }
@@ -209,10 +209,10 @@ static const NSUInteger KBFetchNumber = 10;
 }
 
 - (void)adjustContentOffset:(UIScrollView *)scrollV {
-    CGFloat ratio = scrollV.contentOffset.x / KBPerBarWidth;
+    CGFloat ratio = scrollV.contentOffset.x / YHPerBarWidth;
     NSUInteger tempValue = roundf(ratio);
-    [scrollV setContentOffset:CGPointMake(tempValue * KBPerBarWidth, 0) animated:YES];
-    NSUInteger selected = tempValue + KBVisibleHistorysCount/2;
+    [scrollV setContentOffset:CGPointMake(tempValue * YHPerBarWidth, 0) animated:YES];
+    NSUInteger selected = tempValue + YHVisibleHistorysCount/2;
 
     BarChartDataEntry *entry = self.historys[selected];
     ChartHighlight *high = [[ChartHighlight alloc] initWithX:@(selected).doubleValue y:entry.y dataSetIndex:0 dataIndex:1];
@@ -224,18 +224,18 @@ static const NSUInteger KBFetchNumber = 10;
 - (void)chartValueSelected:(ChartViewBase * _Nonnull)chartView entry:(ChartDataEntry * _Nonnull)entry highlight:(ChartHighlight * _Nonnull)highlight {
     if ([chartView isKindOfClass:[BarLineChartViewBase class]]) {
         BarLineChartViewBase *baseChart = (BarLineChartViewBase *)chartView;
-        KBXAxisRenderer *xAxisRenderer = (KBXAxisRenderer *)(baseChart.xAxisRenderer);
+        YHXAxisRenderer *xAxisRenderer = (YHXAxisRenderer *)(baseChart.xAxisRenderer);
         xAxisRenderer.selectedEntryX = @(highlight.x);
     }
 
     NSInteger dataIndex = @(highlight.x).integerValue;
-    if (dataIndex > self.historys.count - KBVisibleHistorysCount/2 - 1) {
+    if (dataIndex > self.historys.count - YHVisibleHistorysCount/2 - 1) {
         [chartView highlightValue:nil];
         return;
     }
-    CGFloat destinationOffset = dataIndex * KBPerBarWidth + KBPerBarWidth/2.0 - KBChartWidth/2.0;
-    if (destinationOffset + KBChartWidth > self.containerScrollView.contentSize.width) {
-        destinationOffset = self.containerScrollView.contentSize.width - KBChartWidth;
+    CGFloat destinationOffset = dataIndex * YHPerBarWidth + YHPerBarWidth/2.0 - YHChartWidth/2.0;
+    if (destinationOffset + YHChartWidth > self.containerScrollView.contentSize.width) {
+        destinationOffset = self.containerScrollView.contentSize.width - YHChartWidth;
     }
     if (destinationOffset < 0) destinationOffset = 0;
     [self.containerScrollView setContentOffset:CGPointMake(destinationOffset, 0) animated:YES];
@@ -245,7 +245,7 @@ static const NSUInteger KBFetchNumber = 10;
 - (void)chartValueNothingSelected:(ChartViewBase * __nonnull)chartView {
     if ([chartView isKindOfClass:[BarLineChartViewBase class]]) {
         BarLineChartViewBase *baseChart = (BarLineChartViewBase *)chartView;
-        KBXAxisRenderer *xAxisRenderer = (KBXAxisRenderer *)(baseChart.xAxisRenderer);
+        YHXAxisRenderer *xAxisRenderer = (YHXAxisRenderer *)(baseChart.xAxisRenderer);
         xAxisRenderer.selectedEntryX = nil;
     }
 }

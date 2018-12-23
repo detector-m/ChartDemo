@@ -1,15 +1,15 @@
 //
-//  KBBarChartRenderer.swift
+//  BarChartRenderer.swift
 //
 //
 //  Created by 杨虎 on 2018/10/30.
-//  Copyright © 2018年 Beijing Calorie Technology Co., Ltd. All rights reserved.
+//  Copyright © 2018年  . All rights reserved.
 //
 
 import Foundation
 import Charts
 
-@objc public protocol KBBarChartRendererDelegate {
+@objc public protocol YHBarChartRendererDelegate {
     /// Called when drawning a bar's shape.
     @objc optional func drawBarChartShape(context: CGContext, barRect: CGRect) -> Void
     
@@ -17,13 +17,13 @@ import Charts
     @objc optional func drawBarChartHighlightShape(context: CGContext, barRect: CGRect) -> Void
 }
 
-class KBBarChartRenderer: BarChartRenderer {
+class YHBarChartRenderer: BarChartRenderer {
     private class Buffer
     {
         var rects = [CGRect]()
     }
     
-    @objc open weak var delegate: KBBarChartRendererDelegate?
+    @objc open weak var delegate: YHBarChartRendererDelegate?
     
     private var _buffers = [Buffer]()
     

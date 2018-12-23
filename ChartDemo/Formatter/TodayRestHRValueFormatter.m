@@ -1,16 +1,14 @@
 //
-//  KBTodayRestHRValueFormatter.m
-//  Keep
 //
 //  Created by 杨虎 on 2018/9/25.
-//  Copyright © 2018年 Beijing Calorie Technology Co., Ltd. All rights reserved.
+//  Copyright © 2018年. All rights reserved.
 //
 
-#import "KBTodayRestHRValueFormatter.h"
+#import "TodayRestHRValueFormatter.h"
 
-@implementation KBTodayRestHRValueFormatter
+@implementation TodayRestHRValueFormatter
 /**
- * 手环记录每5分钟一个心率数据，一天有(60/5 * 24) = 288 个数据,
+ * 每5分钟一个数据，一天有(60/5 * 24) = 288 个数据,
  * value 取值： 0 =< value < 288
  * X轴每隔6小时显示一个时间点
  */

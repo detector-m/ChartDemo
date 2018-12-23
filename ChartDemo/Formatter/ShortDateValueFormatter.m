@@ -1,14 +1,12 @@
 //
-//  KitbitShortDateValueFormatter.m
-//  Keep
 //
 //  Created by 杨虎 on 2018/8/16.
-//  Copyright © 2018年 Beijing Calorie Technology Co., Ltd. All rights reserved.
+//  Copyright © 2018年 . All rights reserved.
 //
 
-#import "KitbitShortDateValueFormatter.h"
+#import "ShortDateValueFormatter.h"
 
-@interface KitbitShortDateValueFormatter()
+@interface ShortDateValueFormatter()
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
@@ -18,7 +16,7 @@
 
 @end
 
-@implementation KitbitShortDateValueFormatter
+@implementation ShortDateValueFormatter
 
 - (instancetype)initWithVisibleLabelsCount:(NSUInteger)count {
     self = [super init];

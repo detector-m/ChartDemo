@@ -1,15 +1,15 @@
 //
-//  KeepCustomCircleShapeRenderer.swift
-//  Keep
+//  CustomCircleShapeRenderer.swift
+  
 //
 //  Created by 杨虎 on 2018/8/21.
-//  Copyright © 2018年 Beijing Calorie Technology Co., Ltd. All rights reserved.
+//  Copyright © 2018年  . All rights reserved.
 //
 
 import UIKit
 import Charts
 
-class KeepCustomCircleShapeRenderer: NSObject, IShapeRenderer {
+class CustomCircleShapeRenderer: NSObject, IShapeRenderer {
     open func renderShape(
         context: CGContext,
         dataSet: IScatterChartDataSet,

@@ -1,18 +1,16 @@
 //
-//  KitbitTodayHeartRateMarkerValueFormatter.m
-//  Keep
 //
 //  Created by 杨虎 on 2018/8/21.
-//  Copyright © 2018年 Beijing Calorie Technology Co., Ltd. All rights reserved.
+//  Copyright © 2018年  . All rights reserved.
 //
 
-#import "KitbitTodayHeartRateMarkerValueFormatter.h"
+#import "TodayHeartRateMarkerValueFormatter.h"
 
-@interface KitbitTodayHeartRateMarkerValueFormatter()
+@interface TodayHeartRateMarkerValueFormatter()
 @property (nonatomic, strong) NSMutableArray<BarChartDataEntry *> *yValues;
 @end
 
-@implementation KitbitTodayHeartRateMarkerValueFormatter
+@implementation TodayHeartRateMarkerValueFormatter
 
 - (instancetype)initWithYValues:(NSMutableArray<BarChartDataEntry *> *)yValues {
     self = [super init];
