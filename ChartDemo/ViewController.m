@@ -16,6 +16,7 @@
 #import "ViewController.h"
 #import "ChartDemo-Swift.h"
 #import "ShortDateValueFormatter.h"
+#import "TodayStepMarkerValueFormatter.h"
 
 static const CGFloat YHChartHeight = 343;
 static const NSUInteger YHVisibleHistorysCount = 9;
@@ -108,6 +109,18 @@ static const NSUInteger YHFetchNumber = 10;
         xAxisRenderer.selectedXLabelFont = [UIFont systemFontOfSize:14];
         xAxisRenderer.selectedXLabelTextColor = [UIColor whiteColor];
         _stepHistoryChart.xAxisRenderer = xAxisRenderer;
+        
+        TodayStepMarkerValueFormatter *markerFormatter = [[TodayStepMarkerValueFormatter alloc] initWithYValues:self.historys];
+        XYMarkerView *marker = [[XYMarkerView alloc]
+                                    initWithColor: [UIColor grayColor]
+                                    font: [UIFont systemFontOfSize:12]
+                                    textColor: [UIColor whiteColor]
+                                    insets: UIEdgeInsetsMake(8.0, 8.0, 16.6, 8.0)
+                                    xAxisValueFormatter: markerFormatter
+                                    hideYValue:YES];
+        marker.chartView = _stepHistoryChart;
+        marker.minimumSize = CGSizeMake(94.5, 42.1);
+        _stepHistoryChart.marker = marker;
 
         _stepHistoryChart.delegate = self;
         _stepHistoryChart.drawBarShadowEnabled = NO;
@@ -146,27 +159,27 @@ static const NSUInteger YHFetchNumber = 10;
     LineChartData *d = [[LineChartData alloc] init];
     NSMutableArray *entries = [[NSMutableArray alloc] init];
     for (int index = 0; index < self.stepDatas.count; index++){
-        NSUInteger step = 1000;
+        NSUInteger step = [self.stepDatas[index] integerValue];
         [entries addObject:[[ChartDataEntry alloc] initWithX:index y:step]];
     }
 
     LineChartDataSet *set = [[LineChartDataSet alloc] initWithValues:entries label:@""];
-    [set setColor:[UIColor whiteColor]];
     set.lineWidth = 1;
     set.drawCirclesEnabled = NO;
-    set.mode = LineChartModeLinear;
+    set.mode = LineChartModeStepped;
     set.drawVerticalHighlightIndicatorEnabled = NO;
     set.lineDashLengths = @[@5,@10,@15];
     set.drawValuesEnabled = NO;
     set.highlightEnabled = NO;
     set.axisDependency = AxisDependencyLeft;
+    set.colors = @[[UIColor whiteColor],[UIColor redColor],[UIColor blueColor]];
     [d addDataSet:set];
     return d;
 }
 
 - (BarChartData *)generateBarData {
     BarChartDataSet *set = [[BarChartDataSet alloc] initWithValues:self.historys label:@""];
-    set.axisDependency = AxisDependencyRight;
+    set.axisDependency = AxisDependencyLeft;
     set.drawValuesEnabled = NO;
     BarChartData *d = [[BarChartData alloc] initWithDataSets:@[set]];
     d.barWidth = 0.9f;

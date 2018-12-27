@@ -26,6 +26,7 @@
 		6FE65B9021C4CF6E00B83BA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FE65B8F21C4CF6E00B83BA5 /* Assets.xcassets */; };
 		6FE65B9321C4CF6E00B83BA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FE65B9121C4CF6E00B83BA5 /* LaunchScreen.storyboard */; };
 		6FE65B9621C4CF6E00B83BA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE65B9521C4CF6E00B83BA5 /* main.m */; };
+		77842E0121D4FC23002BB5A5 /* 24小时步数视图.png in Resources */ = {isa = PBXBuildFile; fileRef = 77842E0021D4FC23002BB5A5 /* 24小时步数视图.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		6FE65B9221C4CF6E00B83BA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FE65B9421C4CF6E00B83BA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FE65B9521C4CF6E00B83BA5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		77842E0021D4FC23002BB5A5 /* 24小时步数视图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24小时步数视图.png"; sourceTree = "<group>"; };
 		E733BB9629AF3A1C34530524 /* Pods_ChartDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChartDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBDF0568490D37C7382E3A02 /* Pods-ChartDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChartDemo/Pods-ChartDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,15 +94,15 @@
 			isa = PBXGroup;
 			children = (
 				6F6FADAC21C4FAE400E82E7C /* TodayHeartRateMarkerValueFormatter.h */,
-				6F6FADAD21C4FAE400E82E7C /* TodayStepValueFormatter.h */,
-				6F6FADAE21C4FAE400E82E7C /* TodayStepMarkerValueFormatter.m */,
-				6F6FADAF21C4FAE400E82E7C /* TodayRestHRValueFormatter.h */,
-				6F6FADB021C4FAE400E82E7C /* ShortDateValueFormatter.m */,
 				6F6FADB121C4FAE400E82E7C /* TodayHeartRateMarkerValueFormatter.m */,
-				6F6FADB221C4FAE400E82E7C /* TodayStepValueFormatter.m */,
 				6F6FADB321C4FAE400E82E7C /* TodayStepMarkerValueFormatter.h */,
+				6F6FADAE21C4FAE400E82E7C /* TodayStepMarkerValueFormatter.m */,
+				6F6FADAD21C4FAE400E82E7C /* TodayStepValueFormatter.h */,
+				6F6FADB221C4FAE400E82E7C /* TodayStepValueFormatter.m */,
+				6F6FADAF21C4FAE400E82E7C /* TodayRestHRValueFormatter.h */,
 				6F6FADB421C4FAE400E82E7C /* TodayRestHRValueFormatter.m */,
 				6F6FADB521C4FAE400E82E7C /* ShortDateValueFormatter.h */,
+				6F6FADB021C4FAE400E82E7C /* ShortDateValueFormatter.m */,
 			);
 			path = Formatter;
 			sourceTree = "<group>";
@@ -132,6 +134,7 @@
 				6FE65B8721C4CF6300B83BA5 /* AppDelegate.m */,
 				6FE65B8921C4CF6300B83BA5 /* ViewController.h */,
 				6FE65B8A21C4CF6300B83BA5 /* ViewController.m */,
+				77842E0021D4FC23002BB5A5 /* 24小时步数视图.png */,
 				6FE65B8C21C4CF6300B83BA5 /* Main.storyboard */,
 				6FE65B8F21C4CF6E00B83BA5 /* Assets.xcassets */,
 				6FE65B9121C4CF6E00B83BA5 /* LaunchScreen.storyboard */,
@@ -221,6 +224,7 @@
 				6FE65B9321C4CF6E00B83BA5 /* LaunchScreen.storyboard in Resources */,
 				6FE65B9021C4CF6E00B83BA5 /* Assets.xcassets in Resources */,
 				6FE65B8E21C4CF6300B83BA5 /* Main.storyboard in Resources */,
+				77842E0121D4FC23002BB5A5 /* 24小时步数视图.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
