@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		571772E7A55797185F2E161E /* Pods_ChartDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E733BB9629AF3A1C34530524 /* Pods_ChartDemo.framework */; };
+		6F39ED9D21E3B0E0005C6576 /* YHLineChartRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F39ED9C21E3B0E0005C6576 /* YHLineChartRenderer.swift */; };
 		6F6FADA221C4F2C200E82E7C /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FAD9C21C4F2C200E82E7C /* BalloonMarker.swift */; };
 		6F6FADA321C4F2C200E82E7C /* IAxisAttributeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FAD9D21C4F2C200E82E7C /* IAxisAttributeValueFormatter.swift */; };
 		6F6FADA421C4F2C200E82E7C /* XYMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FAD9E21C4F2C200E82E7C /* XYMarkerView.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		491758ECA01F4E62880E19FF /* Pods-ChartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChartDemo/Pods-ChartDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		6F39ED9C21E3B0E0005C6576 /* YHLineChartRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YHLineChartRenderer.swift; sourceTree = "<group>"; };
 		6F6FAD9C21C4F2C200E82E7C /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		6F6FAD9D21C4F2C200E82E7C /* IAxisAttributeValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAxisAttributeValueFormatter.swift; sourceTree = "<group>"; };
 		6F6FAD9E21C4F2C200E82E7C /* XYMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYMarkerView.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				6F6FAD9F21C4F2C200E82E7C /* YHXAxisRenderer.swift */,
 				6F6FADA021C4F2C200E82E7C /* CustomCircleShapeRenderer.swift */,
 				6F6FADA121C4F2C200E82E7C /* YHBarChartRenderer.swift */,
+				6F39ED9C21E3B0E0005C6576 /* YHLineChartRenderer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				6F6FADBA21C4FAE400E82E7C /* TodayRestHRValueFormatter.m in Sources */,
 				6F6FADA221C4F2C200E82E7C /* BalloonMarker.swift in Sources */,
 				6FE65B8B21C4CF6300B83BA5 /* ViewController.m in Sources */,
+				6F39ED9D21E3B0E0005C6576 /* YHLineChartRenderer.swift in Sources */,
 				6F6FADB621C4FAE400E82E7C /* TodayStepMarkerValueFormatter.m in Sources */,
 				6F6FADB721C4FAE400E82E7C /* ShortDateValueFormatter.m in Sources */,
 				6F6FADA521C4F2C200E82E7C /* YHXAxisRenderer.swift in Sources */,
@@ -431,6 +435,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7EZ23W2MEV;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = ChartDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -444,6 +450,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = young.ChartDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChartDemo/ChartDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -458,6 +465,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7EZ23W2MEV;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = ChartDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -471,6 +480,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = young.ChartDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChartDemo/ChartDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

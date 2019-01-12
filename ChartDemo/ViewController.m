@@ -23,6 +23,8 @@ static const NSUInteger YHFetchNumber = 10;
 
 @interface ViewController () <UIScrollViewDelegate,ChartViewDelegate,YHBarChartRendererDelegate>
 @property (nonatomic, strong) NSMutableArray<BarChartDataEntry *> *historys;
+@property (nonatomic, strong) NSMutableArray<ChartDataEntry *> *lineHistorys;
+
 @property (nonatomic, strong) UIScrollView *containerScrollView;
 @property (nonatomic, strong) CombinedChartView *stepHistoryChart;
 
@@ -65,11 +67,12 @@ static const NSUInteger YHFetchNumber = 10;
         _stepDatas = [NSMutableArray array];
     }
     NSUInteger count = YHFetchNumber;
+    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:count];
     for (NSUInteger i = 0; i < count; i++) {
         NSUInteger random = arc4random_uniform(5000);
-        [_stepDatas addObject:@(random)];
+        [tempArray addObject:@(random)];
     }
-    
+    [_stepDatas addObjectsFromArray:tempArray];
     [self addRandomHistorys];
 
     if (self.stepHistoryChart) {
@@ -135,31 +138,34 @@ static const NSUInteger YHFetchNumber = 10;
     _stepHistoryChart.data = chartData;
     CombinedChartRenderer *combineRender = (CombinedChartRenderer *)_stepHistoryChart.renderer;
     BarChartRenderer *barRender = (BarChartRenderer *)[combineRender getSubRendererWithIndex:1];
-    YHBarChartRenderer *yhRender = [[YHBarChartRenderer alloc] initWithDataProvider:_stepHistoryChart animator:barRender.animator viewPortHandler:barRender.viewPortHandler];
-    yhRender.delegate = self;
-    combineRender.subRenderers = @[[combineRender getSubRendererWithIndex:0],yhRender];
+    LineChartRenderer *lineRender = (LineChartRenderer *)[combineRender getSubRendererWithIndex:0];
+    if (![barRender isKindOfClass:[YHBarChartRenderer class]] || ![lineRender isKindOfClass:[YHLineChartRenderer class]]) {
+        YHBarChartRenderer *yhRender = [[YHBarChartRenderer alloc] initWithDataProvider:_stepHistoryChart animator:barRender.animator viewPortHandler:barRender.viewPortHandler];
+        yhRender.delegate = self;
+        
+        YHLineChartRenderer *yhLineRender = [[YHLineChartRenderer alloc] initWithDataProvider:_stepHistoryChart animator:lineRender.animator viewPortHandler:lineRender.viewPortHandler];
+        yhLineRender.hierarchyColors = @[[[HierarchyColor alloc] initWithY:1000 color:[UIColor greenColor]],[[HierarchyColor alloc] initWithY:3000 color:[UIColor blueColor]],[[HierarchyColor alloc] initWithY:5000 color:[UIColor redColor]]];
+        
+        combineRender.subRenderers = @[yhLineRender,yhRender];
+    }
+    
 
     _stepHistoryChart.leftAxis.axisMaximum = chartData.yMax+10;
 }
 
 - (LineChartData *)generateLineData {
     LineChartData *d = [[LineChartData alloc] init];
-    NSMutableArray *entries = [[NSMutableArray alloc] init];
-    for (int index = 0; index < self.stepDatas.count; index++){
-        NSUInteger step = 1000;
-        [entries addObject:[[ChartDataEntry alloc] initWithX:index y:step]];
-    }
-
-    LineChartDataSet *set = [[LineChartDataSet alloc] initWithValues:entries label:@""];
-    [set setColor:[UIColor whiteColor]];
-    set.lineWidth = 1;
+    
+    LineChartDataSet *set = [[LineChartDataSet alloc] initWithValues:self.lineHistorys label:@""];
+    set.lineWidth = 2;
     set.drawCirclesEnabled = NO;
     set.mode = LineChartModeLinear;
+    set.fillColor = [UIColor clearColor];
     set.drawVerticalHighlightIndicatorEnabled = NO;
-    set.lineDashLengths = @[@5,@10,@15];
     set.drawValuesEnabled = NO;
     set.highlightEnabled = NO;
     set.axisDependency = AxisDependencyLeft;
+    set.colors = @[[UIColor redColor],[UIColor greenColor],[UIColor blueColor]];
     [d addDataSet:set];
     return d;
 }
@@ -182,13 +188,21 @@ static const NSUInteger YHFetchNumber = 10;
     } else {
         [_historys removeAllObjects];
     }
-    for (NSUInteger i = 0; i < _stepDatas.count; i++) {
-        NSUInteger random = arc4random_uniform(5000);
-        [_historys addObject:[[BarChartDataEntry alloc] initWithX:@(i).doubleValue y:@(random).doubleValue]];
+    if (!_lineHistorys) {
+        _lineHistorys = [NSMutableArray array];
+    } else {
+        [_lineHistorys removeAllObjects];
     }
+    
     NSUInteger count = self.stepDatas.count;
+    for (NSUInteger i = 0; i < count ; i++) {
+        double y = [_stepDatas[count - i - 1] doubleValue];
+        [_historys addObject:[[BarChartDataEntry alloc] initWithX:@(i).doubleValue y:y]];
+        [_lineHistorys addObject:[[ChartDataEntry alloc] initWithX:@(i).doubleValue y:y]];
+    }
     for (NSInteger i = count; i < count+YHVisibleHistorysCount/2; i++) {
         [_historys addObject:[[BarChartDataEntry alloc] initWithX:@(i).doubleValue y:@(0).doubleValue]];
+        [_lineHistorys addObject:[[ChartDataEntry alloc] initWithX:@(i).doubleValue y:@(0).doubleValue]];
     }
 }
 

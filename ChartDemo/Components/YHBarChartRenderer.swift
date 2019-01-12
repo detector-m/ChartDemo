@@ -112,7 +112,6 @@ class YHBarChartRenderer: BarChartRenderer {
                 barRect.size.width = right - left
                 barRect.origin.y = top
                 barRect.size.height = bottom - top
-                debugPrint("barRect === \(barRect)");
                 buffer.rects[bufferIndex] = barRect
                 bufferIndex += 1
             }
@@ -169,7 +168,6 @@ class YHBarChartRenderer: BarChartRenderer {
                 }
             }
         }
-        debugPrint("buffer.rects === \(buffer.rects)");
     }
     
     private var _barShadowRectBuffer: CGRect = CGRect()
