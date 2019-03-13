@@ -554,7 +554,8 @@ class YHBarChartRenderer: BarChartRenderer {
                     {
                         extraTopOffset = chartView.extraTopOffset;
                     }
-                    barRect.origin.y += viewPortHandler.contentTop + extraTopOffset;
+//                    barRect.origin.y += viewPortHandler.contentTop + extraTopOffset;
+                    barRect.origin.y += extraTopOffset;
                     self.delegate!.drawBarChartShape!(context: context, barRect: barRect)
                 }
                 else
@@ -649,7 +650,8 @@ class YHBarChartRenderer: BarChartRenderer {
                         {
                             extraTopOffset = chartView.extraTopOffset;
                         }
-                        barRect.origin.y += viewPortHandler.contentTop + extraTopOffset;
+//                        barRect.origin.y += viewPortHandler.contentTop + extraTopOffset;
+                        barRect.origin.y += extraTopOffset;
                         self.delegate!.drawBarChartHighlightShape!(context: context, barRect: barRect)
                     }
                     else
